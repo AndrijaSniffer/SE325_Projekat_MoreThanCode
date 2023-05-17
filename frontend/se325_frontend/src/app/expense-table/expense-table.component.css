@@ -1,0 +1,17 @@
+.option-btns {
+  width: 190px;
+}
+
+.tr {
+  text-align: end;
+}
+
+.sort-arrow {
+  font-size: 22px;
+}
+
+.sort-btn {
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-top: 0;
+}
