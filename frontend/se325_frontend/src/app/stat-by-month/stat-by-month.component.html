@@ -29,9 +29,11 @@
   </div>
   <div class="col-8">
     <ngx-charts-bar-vertical
+      i18n-xAxisLabel
+      i18n-yAxisLabel
       [results]="statsByMonthChart"
-      [xAxisLabel]="xLabel"
-      [yAxisLabel]="yLabel"
+      xAxisLabel="Mesec"
+      yAxisLabel="Potrošnja"
       [xAxis]="xAxis"
       [yAxis]="yAxis"
       [showXAxisLabel]="showXAxisLabel"

@@ -1,21 +1,30 @@
-
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" (click)="navigateToHome()" style="cursor: pointer">Finance manager</a>
     <form class="d-flex input-group w-auto">
       <div class="dropdown">
-        <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+        <button class="btn" type="button" id="statDropdownBtn" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
           <span class="fi icon-stat"></span>
         </button>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <button class="dropdown-item" (click)="navigateToStatisticByShop()">Statistika po prodavnicama</button>
-          <button class="dropdown-item" (click)="navigateToStatisticByYear()">Statistika po godinama</button>
-          <button class="dropdown-item" (click)="navigateToStatisticsByMonth()">Statistika po mesecima</button>
+        <div class="dropdown-menu" aria-labelledby="statDropdownBtn">
+          <button class="dropdown-item" (click)="navigateToStatisticByShop()" i18n>Statistika po prodavnicama</button>
+          <button class="dropdown-item" (click)="navigateToStatisticByYear()" i18n>Statistika po godinama</button>
+          <button class="dropdown-item" (click)="navigateToStatisticsByMonth()" i18n>Statistika po mesecima</button>
         </div>
       </div>
-      <button class="btn"><span class="fi fi-rs"></span></button>
+
+      <div class="dropdown">
+        <button class="btn" type="button" id="languageDropdownBtn" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><span
+          [ngClass]="{'fi-rs': activeLocale === 'sr', 'fi-gb': activeLocale === 'en-GB'}" class="fi"></span></button>
+
+        <div class="dropdown-menu lang-menu" aria-labelledby="statDropdownBtn">
+          <button class="btn dropdown-item" (click)="changeLocale('sr')"><span class="fi fi-rs"></span></button>
+          <button class="dropdown-item" (click)="changeLocale('en-GB')"><span class="fi fi-gb"></span></button>
+        </div>
+      </div>
       <input
         type="search"
         class="form-control search-control"

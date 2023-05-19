@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "locale": "ng build --localize && npx http-server dist/se325_frontend"
   },
   "private": true,
   "dependencies": {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject, LOCALE_ID} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,7 +8,8 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              @Inject(LOCALE_ID) public activeLocale: string) {
   }
 
   navigateToHome() {
@@ -25,6 +26,10 @@ export class AppComponent {
 
   navigateToStatisticsByMonth() {
     this._router.navigate(["stat-month"])
+  }
+
+  changeLocale(lang: string) {
+    window.location.href = `/${lang}`;
   }
 
   title = 'se325_frontend';

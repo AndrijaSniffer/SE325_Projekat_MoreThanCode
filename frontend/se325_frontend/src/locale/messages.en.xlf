@@ -285,15 +285,6 @@
 
         <target>Shop</target>
       </trans-unit>
-      <trans-unit id="2764703818031246432" datatype="html">
-        <source>Potrosnja</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/expense-form/expense-form.component.html</context>
-          <context context-type="linenumber">23</context>
-        </context-group>
-
-        <target>Expense</target>
-      </trans-unit>
       <trans-unit id="5913844545841311953" datatype="html">
         <source>Sacuvaj</source>
         <context-group purpose="location">
@@ -310,12 +301,20 @@
       <trans-unit id="531865295824343786" datatype="html">
         <source>Potrošnja</source>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/expense-form/expense-form.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.html</context>
           <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.html</context>
+          <context context-type="linenumber">36</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/stat-by-property/stat-by-property.component.html</context>
@@ -325,6 +324,11 @@
           <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+
         <target>Expense</target>
       </trans-unit>
       <trans-unit id="8162620799210620104" datatype="html">
@@ -408,11 +412,11 @@
         </context-group>
         <target>Income</target>
       </trans-unit>
-      <trans-unit id="3722303953255698284" datatype="html">
-        <source>Potrosnje</source>
+      <trans-unit id="445450954182332939" datatype="html">
+        <source>Potrošnje</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/income-table/income-table.component.html</context>
-          <context context-type="linenumber">62,64</context>
+          <context context-type="linenumber">63</context>
         </context-group>
 
         <target>Expenses</target>
@@ -431,17 +435,66 @@
           <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
 
         <target>Year</target>
       </trans-unit>
-      <trans-unit>
+      <trans-unit id="3959851977654536876" datatype="html">
         <source>Mesec</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.html</context>
           <context context-type="linenumber">6</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
 
         <target>Month</target>
+      </trans-unit>
+      <trans-unit id="1007063212801484074" datatype="html">
+        <source>Zarade</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
+          <context context-type="linenumber">62,64</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+
+        <target>Incomes</target>
+      </trans-unit>
+
+      <trans-unit id="1736865351243279093" datatype="html">
+        <source>Statistika po prodavnicama</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+
+        <target>Statistics by shop</target>
+      </trans-unit>
+      <trans-unit id="6715424444480178221" datatype="html">
+        <source>Statistika po godinama</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+
+        <target>Yearly statistics</target>
+      </trans-unit>
+      <trans-unit id="3587078984428736556" datatype="html">
+        <source>Statistika po mesecima</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+
+        <target>Monthly statistics</target>
       </trans-unit>
     </body>
   </file>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {TableOptions} from "../classes/table-options";
 import {Income} from "../classes/income";
 import {Router} from "@angular/router";
@@ -35,7 +35,9 @@ export class IncomeTableComponent implements OnInit {
     {incomeId: 1, date: "2019-02-21", source: "Prodaja namirnica", earning: 9600.0},
   ]
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router,
+              @Inject(LOCALE_ID) public activeLocale: string) {
+
   }
 
   ngOnInit(): void {
@@ -62,4 +64,5 @@ export class IncomeTableComponent implements OnInit {
     }
   }
 
+  protected readonly LOCALE_ID = LOCALE_ID;
 }

@@ -38,7 +38,7 @@
     <td>{{i + 1}}</td>
     <td>{{expense.date}}</td>
     <td>{{expense.source}}</td>
-    <td>{{expense.earning | number: '1.1-1'}}</td>
+    <td>{{expense.earning | number: '1.1-1' : activeLocale}}</td>
     <td>
       <button class="btn"><i class="bi bi-pencil"></i></button>
     </td>
@@ -60,7 +60,7 @@
   <div class="col-2"></div>
   <div class="col-6 tr">
     <button class="btn btn-outline-primary option-btns" (click)="goToExpensesTable()" style="margin-right: 40px" i18n>
-      Potrosnje
+      Potrošnje
     </button>
     <button class="btn btn-outline-primary option-btns" (click)="goToIncomeForm()" i18n>Dodaj zaradu</button>
   </div>

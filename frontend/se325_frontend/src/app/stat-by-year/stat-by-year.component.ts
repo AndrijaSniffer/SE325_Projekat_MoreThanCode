@@ -33,8 +33,8 @@ export class StatByYearComponent implements OnInit {
   gradient: boolean = false;
   showLegend: boolean = false;
   showLabels: boolean = true;
-  xLabel: string = "Godina"
-  yLabel: string = "Potrosnja"
+  xLabel: string = $localize`Godina`;
+  yLabel: string = $localize`Potrošnja`;
   colorScheme: Color = {
     name: "MyColor",
     selectable: true,
