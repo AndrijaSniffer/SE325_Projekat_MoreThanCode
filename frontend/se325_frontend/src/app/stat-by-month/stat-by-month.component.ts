@@ -43,7 +43,7 @@ export class StatByMonthComponent implements OnInit {
   showLegend: boolean = false;
   showLabels: boolean = true;
   // xLabel: string = $localize `Mesec`;
-  // yLabel: string = $localize `Potrošnja`;
+  // yLabel: string = $localize `Trošak`;
   colorScheme: Color = {
     name: "MyColor",
     selectable: true,

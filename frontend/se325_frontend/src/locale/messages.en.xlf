@@ -298,8 +298,8 @@
 
         <target>Save</target>
       </trans-unit>
-      <trans-unit id="531865295824343786" datatype="html">
-        <source>Potrošnja</source>
+      <trans-unit id="6985095737491937823" datatype="html">
+        <source>Trošak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-form/expense-form.component.html</context>
           <context context-type="linenumber">23</context>
@@ -323,10 +323,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.html</context>
           <context context-type="linenumber">7</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.ts</context>
-          <context context-type="linenumber">37</context>
         </context-group>
 
         <target>Expense</target>
@@ -356,8 +352,8 @@
         </context-group>
         <target>Delete</target>
       </trans-unit>
-      <trans-unit id="4856996813778042158" datatype="html">
-        <source>Zarade</source>
+      <trans-unit id="2591377721685858212" datatype="html">
+        <source>Prihodi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">62,63</context>
@@ -365,8 +361,8 @@
 
         <target>Incomes</target>
       </trans-unit>
-      <trans-unit id="4516119075597012459" datatype="html">
-        <source>Dodaj kupovinu</source>
+      <trans-unit id="7362657726096081370" datatype="html">
+        <source>Dodaj trošak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">64</context>
@@ -412,8 +408,8 @@
         </context-group>
         <target>Income</target>
       </trans-unit>
-      <trans-unit id="445450954182332939" datatype="html">
-        <source>Potrošnje</source>
+      <trans-unit id="6335281930455591465" datatype="html">
+        <source>Troškovi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/income-table/income-table.component.html</context>
           <context context-type="linenumber">63</context>
@@ -421,8 +417,8 @@
 
         <target>Expenses</target>
       </trans-unit>
-      <trans-unit id="4796317372982707930" datatype="html">
-        <source>Dodaj zaradu</source>
+      <trans-unit id="7759466568948063737" datatype="html">
+        <source>Dodaj prihod</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/income-table/income-table.component.html</context>
           <context context-type="linenumber">65</context>
@@ -434,10 +430,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.html</context>
           <context context-type="linenumber">6</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/stat-by-year/stat-by-year.component.ts</context>
-          <context context-type="linenumber">36</context>
         </context-group>
 
         <target>Year</target>
@@ -455,17 +447,12 @@
 
         <target>Month</target>
       </trans-unit>
-      <trans-unit id="1007063212801484074" datatype="html">
-        <source>Zarade</source>
+      <trans-unit id="2591377721685858212" datatype="html">
+        <source>Prihodi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">62,64</context>
         </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/stat-by-month/stat-by-month.component.ts</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-
         <target>Incomes</target>
       </trans-unit>
 

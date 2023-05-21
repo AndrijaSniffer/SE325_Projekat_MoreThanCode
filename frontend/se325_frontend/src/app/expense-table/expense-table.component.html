@@ -20,7 +20,7 @@
           class="bi sort-arrow"></i>
       </button>
     </th>
-    <th scope="col"><span i18n>Potrošnja</span>
+    <th scope="col"><span i18n>Trošak</span>
       <button class="btn sort-btn" (click)="tableSort('cost')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'cost',
@@ -61,9 +61,9 @@
   <div class="col-2"></div>
   <div class="col-6 tr">
     <button class="btn btn-outline-primary option-btns" (click)="goToIncomeTable()" style="margin-right: 40px" i18n>
-      Zarade
+      Prihodi
     </button>
-    <button class="btn btn-outline-primary option-btns" (click)="goToAddExpense()" i18n>Dodaj kupovinu</button>
+    <button class="btn btn-outline-primary option-btns" (click)="goToAddExpense()" i18n>Dodaj trošak</button>
   </div>
 </div>
 

@@ -302,8 +302,8 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="531865295824343786" datatype="html">
-        <source>Potrošnja</source>
+      <trans-unit id="6985095737491937823" datatype="html">
+        <source>Trošak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-form/expense-form.component.html</context>
           <context context-type="linenumber">23</context>
@@ -366,15 +366,15 @@
           <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="1007063212801484074" datatype="html">
-        <source>Zarade</source>
+      <trans-unit id="2591377721685858212" datatype="html">
+        <source>Prihodi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">63,65</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4516119075597012459" datatype="html">
-        <source>Dodaj kupovinu</source>
+      <trans-unit id="7362657726096081370" datatype="html">
+        <source>Dodaj trošak</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/expense-table/expense-table.component.html</context>
           <context context-type="linenumber">66</context>
@@ -413,18 +413,18 @@
           <context context-type="linenumber">23</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="445450954182332939" datatype="html">
-        <source>Potrošnje</source>
+      <trans-unit id="6335281930455591465" datatype="html">
+        <source>Troškovi</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/income-table/income-table.component.html</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">62,64</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4796317372982707930" datatype="html">
-        <source>Dodaj zaradu</source>
+      <trans-unit id="7759466568948063737" datatype="html">
+        <source>Dodaj prihod</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/income-table/income-table.component.html</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">65</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3959851977654536876" datatype="html">

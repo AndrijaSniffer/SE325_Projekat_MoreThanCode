@@ -5,3 +5,7 @@
 .lang-menu {
   min-width: 1rem !important;
 }
+
+.home-logo:hover {
+  text-decoration: underline black;
+}
