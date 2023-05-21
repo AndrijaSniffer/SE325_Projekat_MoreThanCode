@@ -1,0 +1,9 @@
+form {
+  font-family: Inter;
+  font-weight: 400;
+}
+
+.submit-btn {
+  position: sticky;
+  top: 50%;
+}

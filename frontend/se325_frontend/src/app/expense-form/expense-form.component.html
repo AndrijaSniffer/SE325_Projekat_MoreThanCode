@@ -1,0 +1,30 @@
+<form>
+  <div class="row">
+    <div class="col">
+      <label for="datumKupovine" i18n>Datum kupovine</label>
+      <div class="input-group">
+        <input
+          id="datumKupovine"
+          class="form-control"
+          placeholder="mm-dd-yyyy"
+          name="datumKupovine"
+          [(ngModel)]="model"
+          ngbDatepicker
+          #d="ngbDatepicker"
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+    <div class="col">
+      <label for="prodavnica" i18n>Prodavnica</label>
+      <input type="text" class="form-control" id="prodavnica">
+    </div>
+    <div class="col">
+      <label for="potrosnja" i18n>Trošak</label>
+      <input type="number" class="form-control" id="potrosnja">
+    </div>
+    <div class="col">
+      <button class="btn btn-primary submit-btn" i18n>Sacuvaj</button>
+    </div>
+  </div>
+</form>

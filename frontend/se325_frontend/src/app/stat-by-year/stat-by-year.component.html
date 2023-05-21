@@ -1,0 +1,46 @@
+<div class="row main-row">
+  <div class="col-4">
+    <table class="table table-striped">
+      <thead style="background-color: #B8DAFF; border-color: #8F8DF1;">
+      <tr>
+        <th scope="col" i18n>Godina</th>
+        <th scope="col" i18n>Trošak</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let stat of statsByYear">
+        <td>{{stat.year}}</td>
+        <td>{{stat.cost | number: '1.1-1'}}</td>
+      </tr>
+      </tbody>
+    </table>
+    {{xLabel}}
+    {{yLabel}}
+
+    <!--    <div class="row">-->
+    <!--      <div class="col-4">-->
+    <!--        <ngb-pagination-->
+    <!--          [(page)]="options.pageNumber"-->
+    <!--          [pageSize]="options.pageSize"-->
+    <!--          [collectionSize]="options.totalElements"-->
+    <!--          (pageChange)="onPageChange($event)"></ngb-pagination>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+
+  </div>
+  <div class="col-8">
+    <ngx-charts-bar-vertical
+      [results]="statsByYearChart"
+      [xAxisLabel]="xLabel"
+      [yAxisLabel]="yLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [legend]="showLegend"
+      [scheme]="colorScheme"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+</div>
