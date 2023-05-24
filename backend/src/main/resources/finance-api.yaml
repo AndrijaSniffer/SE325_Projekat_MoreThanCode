@@ -244,17 +244,17 @@ paths:
     get:
       tags:
         - Incomes
-      summary: List of Incomes for specified shop
-      description: Get a list of incomes for specified shop
-      operationId: getIncomesByShop
+      summary: List of Incomes for specified source
+      description: Get a list of incomes for specified source
+      operationId: getIncomesBySource
       parameters:
-        - name: shop
+        - name: source
           in: query
-          description: Full name of the shop or first few charactes
+          description: Full name of the source or first few charactes
           required: true
           schema:
             type: string
-            example: 'Maxi'
+            example: 'Posao'
         - $ref: '#/components/parameters/PageNumberParam'
         - $ref: '#/components/parameters/PageSizeParam'
         - $ref: '#/components/parameters/SortParam'
@@ -263,20 +263,20 @@ paths:
           $ref: '#/components/responses/GetIncomesResponse'
         default:
           $ref: '#/components/responses/ErrorResponse'
-  /incomes-by-shop:
+  /incomes-by-source:
     get:
       tags:
         - Incomes statistics
-      summary: Incomes statistics by shop
-      description: Provides statistic of incomes by shop
-      operationId: getIncomesStatisticsByShop
+      summary: Incomes statistics by source
+      description: Provides statistic of incomes by source
+      operationId: getIncomesStatisticsBySource
       responses:
         200:
-          description: Incomes Statistics by shop
+          description: Incomes Statistics by source
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ExpenseStatisticsList'
+                $ref: '#/components/schemas/IncomeStatisticsList'
   /incomes-by-year:
     get:
       tags:
@@ -600,7 +600,7 @@ components:
     IncomeStatistics:
       type: object
       properties:
-        shop:
+        source:
           maxLength: 40
           minLength: 2
           type: string

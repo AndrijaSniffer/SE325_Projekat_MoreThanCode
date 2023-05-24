@@ -31,13 +31,23 @@ public class ExpenseServiceImpl implements ExpenseService {
         if(sort.startsWith("-"))
             sort = sort.substring(1);
         Pageable pageable = PageRequest.of(pageNumber, pageSize, sortDirection, sort);
-        Page<Expense> expenses = expenseRepository.findAll(pageable);
+        Page<Expense> expenses = expenseRepository.findAllByUser_Username(pageable, username);
+        return MAPPER.mapExpensesToExpensePageDto(expenses);
+    }
+
+    @Override
+    public ExpensePageDto getExpensesByShop(String username, Integer pageNumber, Integer pageSize, String sort, String shop) {
+        Sort.Direction sortDirection = sort.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        if(sort.startsWith("-"))
+            sort = sort.substring(1);
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sortDirection, sort);
+        Page<Expense> expenses = expenseRepository.findAllByUser_UsernameAndShop(pageable, username, shop);
         return MAPPER.mapExpensesToExpensePageDto(expenses);
     }
 
     @Override
     public ExpenseDto getExpenseDtoByExpenseId(Integer expenseId, String username) {
-        Expense expense = expenseRepository.findByExpenseIdAndAndUser_Username(expenseId, username)
+        Expense expense = expenseRepository.findByExpenseIdAndUser_Username(expenseId, username)
                 .orElseThrow(() -> new ExpenseNotFoundException("Expense with ID: " + expenseId + " doesn't exist!"));
         return MAPPER.mapExpenseToExpenseDto(expense);
     }

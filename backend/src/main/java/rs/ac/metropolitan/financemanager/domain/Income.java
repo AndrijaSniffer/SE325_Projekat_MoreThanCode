@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.Date;
 @Entity
 @Data
@@ -12,10 +13,10 @@ public class Income {
     @Id
     @GeneratedValue
     private Integer incomeId;
-    private Date date;
+    private OffsetDateTime date;
     private String source;
     private BigDecimal earning;
     @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 }

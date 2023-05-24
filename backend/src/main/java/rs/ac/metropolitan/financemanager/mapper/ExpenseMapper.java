@@ -7,10 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import rs.ac.metropolitan.financemanager.domain.Expense;
 import rs.ac.metropolitan.financemanager.domain.User;
-import rs.ac.metropolitan.financemanager.dto.ExpenseDto;
-import rs.ac.metropolitan.financemanager.dto.ExpensePageDto;
-import rs.ac.metropolitan.financemanager.dto.SortDto;
-import rs.ac.metropolitan.financemanager.dto.UserDto;
+import rs.ac.metropolitan.financemanager.dto.*;
 import rs.ac.metropolitan.financemanager.model.*;
 
 import java.util.List;
@@ -80,6 +77,4 @@ public interface ExpenseMapper {
         }
         return sortDto;
     }
-
-
 }
