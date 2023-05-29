@@ -592,6 +592,12 @@ components:
         cost:
           type: number
           example: 2540.5
+        year:
+          type: string
+          example: 2023
+        month:
+          type: string
+          example: January
     IncomeStatisticsList:
       type: array
       description: List of Incomes statistics
@@ -607,7 +613,13 @@ components:
           example: 'Posao'
         cost:
           type: number
-          example: 5000
+          example: 2540.5
+        year:
+          type: string
+          example: 2023
+        month:
+          type: string
+          example: January
 
     PagedResponse:
       type: object

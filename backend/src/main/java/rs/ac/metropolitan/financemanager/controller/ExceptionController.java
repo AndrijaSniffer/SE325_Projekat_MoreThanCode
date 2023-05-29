@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import rs.ac.metropolitan.financemanager.exceptions.ExpenseNotFoundException;
+import rs.ac.metropolitan.financemanager.exceptions.IncomeNotFoundException;
 import rs.ac.metropolitan.financemanager.exceptions.UsernameAlreadyExistsException;
 import rs.ac.metropolitan.financemanager.model.ErrorResponse;
 
@@ -24,6 +25,14 @@ public class ExceptionController {
 
     @ExceptionHandler({ ExpenseNotFoundException.class })
     public final ResponseEntity<ErrorResponse> handleException(ExpenseNotFoundException ex, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage(ex.getMessage());
+        errorResponse.setCode(4000);
+        return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ IncomeNotFoundException.class })
+    public final ResponseEntity<ErrorResponse> handleException(IncomeNotFoundException ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setCode(4000);
