@@ -11,7 +11,8 @@ import java.time.OffsetDateTime;
 @Table(name = "expenses")
 public class Expense {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "ExpenseSeq")
+    @SequenceGenerator(name = "ExpenseSeq", sequenceName = "expense_sequence")
     private Integer expenseId;
     private OffsetDateTime date;
     private String shop;

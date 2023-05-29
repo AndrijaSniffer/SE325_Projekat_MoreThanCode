@@ -11,7 +11,8 @@ import java.util.Date;
 @Table(name = "incomes")
 public class Income {
     @Id
-    @GeneratedValue
+    @GeneratedValue(generator = "IncomeSeq")
+    @SequenceGenerator(name = "IncomeSeq", sequenceName = "income_sequence")
     private Integer incomeId;
     private OffsetDateTime date;
     private String source;
