@@ -1,0 +1,789 @@
+openapi: 3.0.2
+info:
+  title: Finance manager
+  description: Application that takes care about your expenses and incomes
+  version: "1.0"
+servers:
+  - url: https://api.finance-manager.com/v1
+    description: Production Server
+  - url: https://localhost:8080/v1
+    description: Development Server
+security:
+  - BasicAuth: []
+paths:
+  /expenses:
+    get:
+      tags:
+        - Expenses
+      summary: List of Expenses
+      description: Get a list of all expenses
+      operationId: getExpenses
+      parameters:
+        - $ref: '#/components/parameters/PageNumberParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        200:
+          $ref: '#/components/responses/GetExpensesResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+    post:
+      tags:
+        - Expenses
+      summary: Add new expense
+      description: Create a new expense
+      operationId: createExpense
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseRequest'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/CreateExpenseResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /expenses/{expenseId}:
+    get:
+      tags:
+        - Expenses
+      summary: Get Expense By ID
+      description: Get a single **Expense** by its Id value.
+      operationId: getExpenseById
+      parameters:
+        - $ref: '#/components/parameters/ExpenseIdPathParm'
+      responses:
+        200:
+          $ref: '#/components/responses/GetExpenseByIdResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags:
+        - Expenses
+      summary: Update Expense
+      operationId: updateExpense
+      description: Update expense by id.
+      parameters:
+        - $ref: '#/components/parameters/ExpenseIdPathParm'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseRequest'
+        required: true
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateExpenseResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+        - Expenses
+      summary: Delete Expense By ID
+      description: Delete expense by its Id value.
+      operationId: deleteExpense
+      parameters:
+        - $ref: '#/components/parameters/ExpenseIdPathParm'
+      responses:
+        204:
+          description: Expense with specified ID is deleted
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /expenses/:
+    get:
+      tags:
+        - Expenses
+      summary: List of Expenses for specified shop
+      description: Get a list of expenses for specified shop
+      operationId: getExpensesByShop
+      parameters:
+        - name: shop
+          in: query
+          description: Full name of the shop or first few charactes
+          required: true
+          schema:
+            type: string
+            example: 'Maxi'
+        - $ref: '#/components/parameters/PageNumberParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        200:
+          $ref: '#/components/responses/GetExpensesResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /expenses-by-shop:
+    get:
+      tags:
+        - Expenses statistics
+      summary: Expenses statistics by shop
+      description: Provides statistic of expenses by shop
+      operationId: getExpensesStatisticsByShop
+      responses:
+        200:
+          description: Expenses Statistics by shop
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseStatisticsList'
+  /expenses-by-year:
+    get:
+      tags:
+        - Expenses statistics
+      summary: Expenses statistics by year
+      description: Provides statistic of expenses by year
+      operationId: getExpensesStatisticsByYear
+      responses:
+        200:
+          description: Expenses Statistics by year
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseStatisticsList'
+  /expenses-by-month/{year}:
+    get:
+      tags:
+        - Expenses statistics
+      summary: Expenses statistics by month
+      description: Provides statistic of expenses by month
+      operationId: getExpensesStatisticsByMonth
+      parameters:
+        - $ref: '#/components/parameters/YearPathParm'
+      responses:
+        200:
+          description: Expenses Statistics by month
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseStatisticsList'
+  /incomes:
+    get:
+      tags:
+        - Incomes
+      summary: List of Incomes
+      description: Get a list of all incomes
+      operationId: getIncomes
+      parameters:
+        - $ref: '#/components/parameters/PageNumberParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        200:
+          $ref: '#/components/responses/GetIncomesResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+    post:
+      tags:
+        - Incomes
+      summary: Add new income
+      description: Create a new income
+      operationId: createIncome
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIncomeRequest'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/CreateIncomeResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+  /incomes/{incomeId}:
+    get:
+      tags:
+        - Incomes
+      summary: Get Income By ID
+      description: Get a single **Income** by its Id value.
+      operationId: getIncomeById
+      parameters:
+        - $ref: '#/components/parameters/IncomeIdPathParm'
+      responses:
+        200:
+          $ref: '#/components/responses/GetIncomeByIdResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    put:
+      tags:
+        - Incomes
+      summary: Update Income
+      operationId: updateIncome
+      description: Update income by id.
+      parameters:
+        - $ref: '#/components/parameters/IncomeIdPathParm'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIncomeRequest'
+        required: true
+      responses:
+        200:
+          $ref: '#/components/responses/UpdateIncomeResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+    delete:
+      tags:
+        - Incomes
+      summary: Delete Income By ID
+      description: Delete income by its Id value.
+      operationId: deleteIncome
+      parameters:
+        - $ref: '#/components/parameters/IncomeIdPathParm'
+      responses:
+        204:
+          description: Income with specified ID is deleted
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /incomes/:
+    get:
+      tags:
+        - Incomes
+      summary: List of Incomes for specified source
+      description: Get a list of incomes for specified source
+      operationId: getIncomesBySource
+      parameters:
+        - name: source
+          in: query
+          description: Full name of the source or first few charactes
+          required: true
+          schema:
+            type: string
+            example: 'Posao'
+        - $ref: '#/components/parameters/PageNumberParam'
+        - $ref: '#/components/parameters/PageSizeParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        200:
+          $ref: '#/components/responses/GetIncomesResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /incomes-by-source:
+    get:
+      tags:
+        - Incomes statistics
+      summary: Incomes statistics by source
+      description: Provides statistic of incomes by source
+      operationId: getIncomesStatisticsBySource
+      responses:
+        200:
+          description: Incomes Statistics by source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeStatisticsList'
+  /incomes-by-year:
+    get:
+      tags:
+        - Incomes statistics
+      summary: Incomes statistics by year
+      description: Provides statistic of incomes by year
+      operationId: getIncomesStatisticsByYear
+      responses:
+        200:
+          description: Incomes Statistics by year
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeStatisticsList'
+  /incomes-by-month/{year}:
+    get:
+      tags:
+        - Incomes statistics
+      summary: Incomes statistics by month
+      description: Provides statistic of incomes by month
+      operationId: getIncomesStatisticsByMonth
+      parameters:
+        - $ref: '#/components/parameters/YearPathParm'
+      responses:
+        200:
+          description: Incomes Statistics by month
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeStatisticsList'
+  /users/register:
+    post:
+      tags:
+        - Users
+      summary: Register a new user
+      description: Register a new user
+      operationId: registerUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterRequest'
+        required: true
+      responses:
+        201:
+          $ref: '#/components/responses/UserRegisterResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /users/login:
+    post:
+      tags:
+        - Users
+      summary: User login
+      description: User login
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginRequest'
+        required: true
+      responses:
+        200:
+          $ref: '#/components/responses/UserLoginResponse'
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+  /users/changePassword:
+    post:
+      tags:
+        - Users
+      summary: Change password
+      description: Change password
+      operationId: changePassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+        required: true
+      responses:
+        200:
+          description: Password is changed sucessfully
+        default:
+          $ref: '#/components/responses/ErrorResponse'
+
+components:
+  schemas:
+    GetExpensesResponse:
+      allOf:
+        - $ref: '#/components/schemas/PagedResponse'
+        - type: object
+          properties:
+            expenseList:
+              $ref: '#/components/schemas/ExpenseList'
+
+    CreateExpenseRequest:
+      allOf:
+        - $ref: '#/components/schemas/ExpenseRequest'
+    CreateExpenseResponse:
+      allOf:
+        - $ref: '#/components/schemas/Expense'
+    GetExpenseByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/Expense'
+    UpdateExpenseRequest:
+      allOf:
+        - $ref: '#/components/schemas/ExpenseRequest'
+    UpdateExpenseResponse:
+      allOf:
+        - $ref: '#/components/schemas/Expense'
+
+    ExpenseList:
+      maxItems: 100
+      minItems: 1
+      type: array
+      description: List of Expenses
+      items:
+        $ref: '#/components/schemas/Expense'
+    Expense:
+      type: object
+      properties:
+        expenseId:
+          type: integer
+          example: 10
+        date:
+          type: string
+          format: date-time
+          example: '2023-03-30'
+        shop:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Maxi'
+        cost:
+          type: number
+          example: 2540.5
+        user:
+          $ref: '#/components/schemas/CurrentUser'
+    ExpenseRequest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: '2023-03-30'
+        shop:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Maxi'
+        cost:
+          type: number
+          example: 2540.5
+    GetIncomesResponse:
+      allOf:
+        - $ref: '#/components/schemas/PagedResponse'
+        - type: object
+          properties:
+            incomeList:
+              $ref: '#/components/schemas/IncomeList'
+    CreateIncomeRequest:
+      allOf:
+        - $ref: '#/components/schemas/IncomeRequest'
+    CreateIncomeResponse:
+      allOf:
+        - $ref: '#/components/schemas/Income'
+    GetIncomeByIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/Income'
+    UpdateIncomeRequest:
+      allOf:
+        - $ref: '#/components/schemas/IncomeRequest'
+    UpdateIncomeResponse:
+      allOf:
+        - $ref: '#/components/schemas/Income'
+    IncomeList:
+      maxItems: 100
+      minItems: 1
+      type: array
+      description: List of Incomes
+      items:
+        $ref: '#/components/schemas/Income'
+    Income:
+      type: object
+      properties:
+        incomeId:
+          type: integer
+          example: 10
+        date:
+          type: string
+          format: date-time
+          example: '2023-03-30'
+        source:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Posao'
+        earning:
+          type: number
+          example: 5000
+        user:
+          $ref: '#/components/schemas/CurrentUser'
+    IncomeRequest:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+          example: '2023-03-30'
+        source:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Posao'
+        earning:
+          type: number
+          example: 7000
+    UserRegisterRequest:
+      type: object
+      properties:
+        firstName:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'Nikola'
+        lastName:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'Becic'
+        username:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'nikola.becic'
+        password:
+          maxLength: 100
+          minLength: 8
+          type: string
+          format: password
+          example: 'test1234'
+    UserRegisterResponse:
+      allOf:
+        - $ref: '#/components/schemas/CurrentUser'
+    UserLoginRequest:
+      type: object
+      properties:
+        username:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'nikola.becic'
+        password:
+          maxLength: 100
+          minLength: 8
+          type: string
+          format: password
+          example: 'test1234'
+    UserLoginResponse:
+      allOf:
+        - $ref: '#/components/schemas/CurrentUser'
+    ChangePasswordRequest:
+      type: object
+      properties:
+        oldPassword:
+          maxLength: 100
+          minLength: 8
+          type: string
+          format: password
+          example: 'test1234'
+        newPassword:
+          maxLength: 100
+          minLength: 8
+          type: string
+          format: password
+          example: 'test5678'
+
+    CurrentUser:
+      type: object
+      properties:
+        userId:
+          type: integer
+          example: 1
+        firstName:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'Nikola'
+        lastName:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'Becic'
+        username:
+          maxLength: 100
+          minLength: 2
+          type: string
+          example: 'nikola.becic'
+
+    ExpenseStatisticsList:
+      type: array
+      description: List of Expenses statistics
+      items:
+        $ref: '#/components/schemas/ExpenseStatistics'
+    ExpenseStatistics:
+      type: object
+      properties:
+        shop:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Maxi'
+        cost:
+          type: number
+          example: 2540.5
+        year:
+          type: string
+          example: 2023
+        month:
+          type: string
+          example: January
+    IncomeStatisticsList:
+      type: array
+      description: List of Incomes statistics
+      items:
+        $ref: '#/components/schemas/IncomeStatistics'
+    IncomeStatistics:
+      type: object
+      properties:
+        source:
+          maxLength: 40
+          minLength: 2
+          type: string
+          example: 'Posao'
+        cost:
+          type: number
+          example: 2540.5
+        year:
+          type: string
+          example: 2023
+        month:
+          type: string
+          example: January
+
+    PagedResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          example: 6
+        totalElements:
+          type: integer
+          example: 52
+        pageSize:
+          type: integer
+          example: 10
+        pageNumber:
+          type: integer
+          example: 3
+        isFirst:
+          type: boolean
+        isLast:
+          type: boolean
+        sort:
+          $ref: '#/components/schemas/PagedResponseSort'
+
+    PagedResponseSort:
+      type: object
+      properties:
+        order:
+          type: string
+          example: 'shop'
+        direction:
+          type: string
+          example: 'desc'
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+      properties:
+        code:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: 'Unauthorized'
+
+  parameters:
+    PageNumberParam:
+      name: pageNumber
+      in: query
+      description: Page Number
+      required: false
+      schema:
+        type: integer
+        default: 1
+    PageSizeParam:
+      name: pageSize
+      in: query
+      description: Page Size
+      required: false
+      schema:
+        type: integer
+        default: 10
+    SortParam:
+      name: sort
+      in: query
+      description: Sorting
+      required: false
+      schema:
+        type: string
+    ExpenseIdPathParm:
+      name: expenseId
+      in: path
+      description: Expense Id
+      required: true
+      schema:
+        type: integer
+        example: 10
+    IncomeIdPathParm:
+      name: incomeId
+      in: path
+      description: Income Id
+      required: true
+      schema:
+        type: integer
+        example: 10
+    YearPathParm:
+      name: year
+      in: path
+      description: Year
+      required: true
+      schema:
+        type: integer
+        example: 2022
+
+  responses:
+    GetExpensesResponse:
+      description: List of all expenses
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetExpensesResponse'
+    CreateExpenseResponse:
+      description: Expense created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateExpenseResponse'
+    GetExpenseByIdResponse:
+      description: Found expense with specified ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetExpenseByIdResponse'
+    UpdateExpenseResponse:
+      description: Updated expense with specified id
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateExpenseResponse'
+    UserRegisterResponse:
+      description: User registered sucessfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserRegisterResponse'
+    UserLoginResponse:
+      description: User logged in sucessfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserLoginResponse'
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    GetIncomesResponse:
+      description: List of all incomes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetIncomesResponse'
+    CreateIncomeResponse:
+      description: Income created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateIncomeResponse'
+    GetIncomeByIdResponse:
+      description: Found income with specified ID
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GetIncomeByIdResponse'
+    UpdateIncomeResponse:
+      description: Updated income with specified id
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UpdateIncomeResponse'
+
+
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
