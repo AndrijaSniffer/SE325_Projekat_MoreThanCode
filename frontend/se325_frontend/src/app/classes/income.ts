@@ -1,7 +1,7 @@
 import {User} from "./user";
 
 export class Income {
-  incomeId: number
+  incomeId?: number
   date: string
   source: string
   earning: number

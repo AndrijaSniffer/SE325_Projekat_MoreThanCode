@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StatByYear} from "../classes/stat-by-year";
 import {Color, ScaleType} from "@swimlane/ngx-charts";
+import {StatisticsService} from "../services/statistics.service";
 
 @Component({
   selector: 'app-stat-by-year',
@@ -9,25 +10,25 @@ import {Color, ScaleType} from "@swimlane/ngx-charts";
 })
 export class StatByYearComponent implements OnInit {
   statsByYear: StatByYear[] = [
-    {year: 2023, cost: 2432.22},
-    {year: 2022, cost: 68000.22},
-    {year: 2021, cost: 51000.22},
-    {year: 2020, cost: 22222.22},
-    {year: 2019, cost: 43000.22},
-    {year: 2018, cost: 32000.22},
-    {year: 2017, cost: 24563.22},
-    {year: 2016, cost: 12543.22}
+    {year: "2023", cost: 0},
+    {year: "2022", cost: 0},
+    {year: "2021", cost: 0},
+    {year: "2020", cost: 0},
+    {year: "2019", cost: 0},
+    {year: "2018", cost: 0},
+    {year: "2017", cost: 0},
+    {year: "2016", cost: 0}
   ]
 
   statsByYearChart: any[] = [
-    {name: "2023", value: 2432.22},
-    {name: "2022", value: 68000.22},
-    {name: "2021", value: 51000.22},
-    {name: "2020", value: 22222.22},
-    {name: "2019", value: 43000.22},
-    {name: "2018", value: 32000.22},
-    {name: "2017", value: 24563.22},
-    {name: "2016", value: 12543.22}
+    {name: "2023", value: 0},
+    {name: "2022", value: 0},
+    {name: "2021", value: 0},
+    {name: "2020", value: 0},
+    {name: "2019", value: 0},
+    {name: "2018", value: 0},
+    {name: "2017", value: 0},
+    {name: "2016", value: 0}
   ]
 
   gradient: boolean = false;
@@ -46,10 +47,39 @@ export class StatByYearComponent implements OnInit {
   showXAxisLabel: boolean = true
   showYAxisLabel: boolean = true
 
-  constructor() {
+  constructor(private _statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
+    this.getStatistics()
+  }
+
+  getStatistics() {
+    this._statisticsService.getStatsByYear().subscribe(stats => {
+      for (const [key, value] of Object.entries(stats)) {
+
+        this.statsByYear.forEach(stat => {
+          if (key === stat.year) {
+            stat.cost = value;
+          }
+        })
+
+        this.statsByYearChart.forEach(stat => {
+          if (key === stat.name) {
+            stat.value = value;
+          }
+        })
+      }
+      this.updateChart();
+    })
+  }
+
+  updateChart() {
+    // console.error(this.statsByYear)
+    // console.error(this.statsByYearChart)
+
+    this.statsByYear = [...this.statsByYear];
+    this.statsByYearChart = [...this.statsByYearChart];
   }
 
 }

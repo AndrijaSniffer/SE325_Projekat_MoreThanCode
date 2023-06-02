@@ -1,4 +1,4 @@
 export class StatByYear {
-  year: number
+  year: string
   cost: number
 }

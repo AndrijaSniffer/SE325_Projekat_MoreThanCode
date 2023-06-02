@@ -7,47 +7,65 @@ import {IncomeFormComponent} from "./income-form/income-form.component";
 import {StatByPropertyComponent} from "./stat-by-property/stat-by-property.component";
 import {StatByYearComponent} from "./stat-by-year/stat-by-year.component";
 import {StatByMonthComponent} from "./stat-by-month/stat-by-month.component";
+import {LoginRegisterComponent} from "./login-register/login-register.component";
+import {UserGuard} from "./user.guard";
 
 const routes: Routes = [
   {
     path: "",
     component: ExpenseTableComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "incomes",
     component: IncomeTableComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "add-expense",
     component: ExpenseFormComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "add-income",
     component: IncomeFormComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "stat-shop",
     component: StatByPropertyComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "stat-year",
     component: StatByYearComponent,
-    children: []
+    children: [],
+    canActivate: [UserGuard]
   },
   {
     path: "stat-month",
     component: StatByMonthComponent,
+    children: [],
+    canActivate: [UserGuard]
+  },
+  {
+    path: "login",
+    component: LoginRegisterComponent,
     children: []
+  },
+  {
+    path: "**",
+    component: LoginRegisterComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

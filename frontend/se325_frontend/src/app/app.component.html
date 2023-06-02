@@ -1,7 +1,9 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light" *ngIf="showNavbar">
   <div class="container-fluid">
-    <a class="navbar-brand" (click)="navigateToHome()" style="cursor: pointer"><span class="bi bi-house"></span> <span
-      class="home-logo">Finance manager</span></a>
+    <a class="navbar-brand" (click)="navigateToHome()" style="cursor: pointer"><span class="bi bi-house"
+                                                                                     style="margin-right: 10px"></span>
+      <span
+        class="home-logo">Finance manager</span></a>
     <form class="d-flex input-group w-auto">
       <div class="dropdown">
         <button class="btn" type="button" id="statDropdownBtn" data-bs-toggle="dropdown"

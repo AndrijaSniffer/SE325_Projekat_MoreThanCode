@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (submit)="submitForm()">
   <div class="row">
     <div class="col">
       <label for="datum" i18n>Datum</label>
@@ -11,20 +11,23 @@
           [(ngModel)]="model"
           ngbDatepicker
           #d="ngbDatepicker"
+          formControlName="date"
+          required
         />
         <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
       </div>
     </div>
     <div class="col">
       <label for="izvor" i18n>Izvor</label>
-      <input type="text" class="form-control" id="izvor">
+      <input type="text" class="form-control" id="izvor" formControlName="source" required>
     </div>
     <div class="col">
       <label for="zarada" i18n>Zarada</label>
-      <input type="number" class="form-control" id="zarada">
+      <input type="number" class="form-control" id="zarada" formControlName="income" required>
     </div>
     <div class="col">
       <button class="btn btn-primary submit-btn" i18n>Sacuvaj</button>
+      <button class="btn btn-warning submit-btn" style="margin-left: 5px" (click)="goBack()">Nazad</button>
     </div>
   </div>
 </form>

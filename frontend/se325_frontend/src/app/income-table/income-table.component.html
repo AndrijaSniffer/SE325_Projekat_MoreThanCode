@@ -6,8 +6,8 @@
       <button class="btn sort-btn" (click)="tableSort('date')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'date',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'date',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'date' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'date',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'date' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -15,8 +15,8 @@
       <button class="btn sort-btn" (click)="tableSort('source')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'source',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'source',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'source' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'source',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'source' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -24,8 +24,8 @@
       <button class="btn sort-btn" (click)="tableSort('earning')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'earning',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'earning',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'earning' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'earning',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'earning' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -34,11 +34,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let expense of expenses; let i = index">
+  <tr *ngFor="let income of incomes; let i = index">
     <td>{{i + 1}}</td>
-    <td>{{expense.date}}</td>
-    <td>{{expense.source}}</td>
-    <td>{{expense.earning | number: '1.1-1' : activeLocale}}</td>
+    <td>{{income.date | date : 'dd-MM-YYYY' : activeLocale}}</td>
+    <td>{{income.source}}</td>
+    <td>{{income.earning | number: '1.1-1' : activeLocale}}</td>
     <td>
       <button class="btn"><i class="bi bi-pencil"></i></button>
     </td>
@@ -52,7 +52,7 @@
 <div class="row">
   <div class="col-4">
     <ngb-pagination
-      [(page)]="options.pageNumber"
+      [(page)]="currentPageNumber"
       [pageSize]="options.pageSize"
       [collectionSize]="options.totalElements"
       (pageChange)="onPageChange($event)"></ngb-pagination>

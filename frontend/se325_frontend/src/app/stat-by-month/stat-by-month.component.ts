@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {StatByMonth} from "../classes/stat-by-month";
 import {Color, ScaleType} from "@swimlane/ngx-charts";
+import {StatisticsService} from "../services/statistics.service";
 
 @Component({
   selector: 'app-stat-by-month',
@@ -10,33 +11,33 @@ import {Color, ScaleType} from "@swimlane/ngx-charts";
 export class StatByMonthComponent implements OnInit {
 
   statsByMonths: StatByMonth[] = [
-    {month: "Januar", cost: 2432.22},
-    {month: "Februar", cost: 68000.22},
-    {month: "Mart", cost: 51000.22},
-    {month: "April", cost: 22222.22},
-    {month: "Maj", cost: 42130.22},
-    {month: "Jun", cost: 43000.22},
-    {month: "Jul", cost: 32000.22},
-    {month: "Avgust", cost: 24563.22},
-    {month: "Septembar", cost: 12543.22},
-    {month: "Oktobar", cost: 54233.22},
-    {month: "Novembar", cost: 85621.22},
-    {month: "Decembar", cost: 33254.22}
+    {month: "January", cost: 0},
+    {month: "February", cost: 0},
+    {month: "March", cost: 0},
+    {month: "April", cost: 0},
+    {month: "May", cost: 0},
+    {month: "June", cost: 0},
+    {month: "July", cost: 0},
+    {month: "Avgust", cost: 0},
+    {month: "September", cost: 0},
+    {month: "October", cost: 0},
+    {month: "November", cost: 0},
+    {month: "December", cost: 0}
   ]
 
   statsByMonthChart: any[] = [
-    {name: "Januar", value: 2432.22},
-    {name: "Februar", value: 68000.22},
-    {name: "Mart", value: 51000.22},
-    {name: "April", value: 22222.22},
-    {name: "Maj", value: 42130.22},
-    {name: "Jun", value: 43000.22},
-    {name: "Jul", value: 32000.22},
-    {name: "Avgust", value: 24563.22},
-    {name: "Septembar", value: 12543.22},
-    {name: "Oktobar", value: 54233.22},
-    {name: "Novembar", value: 85621.22},
-    {name: "Decembar", value: 33254.22}
+    {name: "January", value: 0},
+    {name: "February", value: 0},
+    {name: "March", value: 0},
+    {name: "April", value: 0},
+    {name: "May", value: 0},
+    {name: "June", value: 0},
+    {name: "July", value: 0},
+    {name: "Avgust", value: 0},
+    {name: "September", value: 0},
+    {name: "October", value: 0},
+    {name: "November", value: 0},
+    {name: "December", value: 0}
   ]
 
   gradient: boolean = false;
@@ -55,10 +56,37 @@ export class StatByMonthComponent implements OnInit {
   showXAxisLabel: boolean = true
   showYAxisLabel: boolean = true
 
-  constructor() {
+  constructor(private _statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
+    this.getStatistics()
+  }
+
+  getStatistics() {
+    this._statisticsService.getStatsByMonth().subscribe(stats => {
+      for (const [key, value] of Object.entries(stats)) {
+
+        this.statsByMonths.forEach(stat => {
+          if (key.toLowerCase() === stat.month.toLowerCase()) {
+            stat.cost = value;
+          }
+        })
+
+        this.statsByMonthChart.forEach(stat => {
+          if (key.toLowerCase() === stat.name.toLowerCase()) {
+            stat.value = value;
+          }
+        })
+      }
+      this.updateChart();
+    })
+  }
+
+  updateChart() {
+
+    this.statsByMonths = [...this.statsByMonths];
+    this.statsByMonthChart = [...this.statsByMonthChart];
   }
 
 }

@@ -1,5 +1,6 @@
 import {Component, Inject, LOCALE_ID} from '@angular/core';
 import {Router} from "@angular/router";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,15 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
+  showNavbar = false;
+
   constructor(private _router: Router,
-              @Inject(LOCALE_ID) public activeLocale: string) {
+              @Inject(LOCALE_ID) public activeLocale: string,
+              private _userService: UserService) {
+
+    this._userService.isLogedIn.subscribe(isLogedIn => {
+      this.showNavbar = isLogedIn;
+    })
   }
 
   navigateToHome() {

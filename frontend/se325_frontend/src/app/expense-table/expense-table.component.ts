@@ -2,6 +2,7 @@ import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {Expense} from "../classes/expense";
 import {TableOptions} from "../classes/table-options";
 import {Router} from "@angular/router";
+import {ExpensesService} from "../services/expenses.service";
 
 @Component({
   selector: 'app-expense-table',
@@ -9,40 +10,37 @@ import {Router} from "@angular/router";
   styleUrls: ['./expense-table.component.css']
 })
 export class ExpenseTableComponent implements OnInit {
+  currentPageNumber: number;
   options: TableOptions = {
-    pageNumber: 1,
-    pageSize: 10,
-    totalElements: 50,
-    totalPages: 5,
-    isFirst: true,
+    pageNumber: 0,
+    isFirst: false,
     isLast: false,
+    totalPages: 1,
+    pageSize: 10,
+    totalElements: 1,
     sort: {
-      direction: "desc",
-      order: "shop"
+      direction: "DESC",
+      order: "date"
     }
-  }
-  expenses: Expense[] = [
-    {expenseId: 1, date: "2019-06-12", shop: "Tempo", cost: 2000.0},
-    {expenseId: 1, date: "2019-06-13", shop: "Merkator", cost: 5500.0},
-    {expenseId: 1, date: "2019-06-14", shop: "Merkator", cost: 8000.0},
-    {expenseId: 1, date: "2019-10-18", shop: "Idea", cost: 15000.0},
-    {expenseId: 1, date: "2019-11-28", shop: "Idea", cost: 10000.0},
-    {expenseId: 1, date: "2020-01-04", shop: "Sport Vision", cost: 12600.0},
-    {expenseId: 1, date: "2019-01-05", shop: "NIS Petrol", cost: 8500.0},
-    {expenseId: 1, date: "2019-01-08", shop: "Win Win", cost: 31800.0},
-    {expenseId: 1, date: "2019-02-12", shop: "Gigatron", cost: 46000.0},
-    {expenseId: 1, date: "2019-02-21", shop: "Tempo", cost: 9600.0},
-  ]
+  };
+  expenses: Expense[] = [];
 
   constructor(private _router: Router,
-              @Inject(LOCALE_ID) public activeLocale: string) {
+              @Inject(LOCALE_ID) public activeLocale: string,
+              private _expenseService: ExpensesService) {
   }
 
   ngOnInit(): void {
+    this.getAllExpense();
   }
 
   onPageChange(page: number) {
     console.log("Page change:", page)
+    console.log("Page change:", this.currentPageNumber)
+    if (this.options.pageNumber != page - 1) {
+      this.getAllExpense(page - 1);
+      this.currentPageNumber = page;
+    }
   }
 
   goToIncomeTable() {
@@ -54,12 +52,32 @@ export class ExpenseTableComponent implements OnInit {
   }
 
   tableSort(property: string) {
+    let sort: string;
+
     if (this.options.sort.order == property) {
-      this.options.sort.direction = this.options.sort.direction == 'asc' ? 'desc' : 'asc'
+      this.options.sort.direction = this.options.sort.direction == 'ASC' ? 'DESC' : 'ASC'
+
+      sort = this.options.sort.direction === "DESC" ? "-" : ""
+      sort += property
+
+      this.getAllExpense(this.options.pageNumber, this.options.pageSize, sort)
     } else {
       this.options.sort.order = property
-      this.options.sort.direction = 'desc'
+      this.options.sort.direction = 'DESC'
+
+      sort = `-${property}`
+
+      this.getAllExpense(this.options.pageNumber, this.options.pageSize, sort)
     }
+  }
+
+  getAllExpense(pageNumber: number = 0, pageSize: number = 10, sort: string = "-date") {
+    this._expenseService.getAllExpenses(pageNumber, pageSize, sort).subscribe((tableOptions: TableOptions) => {
+      console.warn(tableOptions);
+      this.options = tableOptions;
+      this.expenses = tableOptions.expenseList;
+    })
+    this.currentPageNumber = 1;
   }
 
 }

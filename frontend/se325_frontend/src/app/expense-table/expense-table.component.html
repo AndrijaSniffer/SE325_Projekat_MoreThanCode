@@ -6,8 +6,8 @@
       <button class="btn sort-btn" (click)="tableSort('date')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'date',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'date',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'date' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'date',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'date' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -15,8 +15,8 @@
       <button class="btn sort-btn" (click)="tableSort('shop')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'shop',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'shop',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'shop' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'shop',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'shop' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -24,8 +24,8 @@
       <button class="btn sort-btn" (click)="tableSort('cost')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'cost',
-          'bi-sort-down': options.sort.direction === 'desc' && options.sort.order === 'cost',
-           'bi-sort-up' : options.sort.direction === 'asc' && options.sort.order === 'cost' }"
+          'bi-sort-down': options.sort.direction === 'DESC' && options.sort.order === 'cost',
+           'bi-sort-up' : options.sort.direction === 'ASC' && options.sort.order === 'cost' }"
           class="bi sort-arrow"></i>
       </button>
     </th>
@@ -36,7 +36,7 @@
   <tbody>
   <tr *ngFor="let expense of expenses; let i = index">
     <td>{{i + 1}}</td>
-    <td>{{expense.date}}</td>
+    <td>{{expense.date | date : 'dd-MM-YYYY' : activeLocale}}</td>
     <td>{{expense.shop}}</td>
     <!--    <td>{{expense.cost | number: '1.1-1'}}</td>-->
     <td>{{expense.cost | number: '1.1-1' : activeLocale}}</td>
@@ -53,7 +53,7 @@
 <div class="row">
   <div class="col-4">
     <ngb-pagination
-      [(page)]="options.pageNumber"
+      [(page)]="currentPageNumber"
       [pageSize]="options.pageSize"
       [collectionSize]="options.totalElements"
       (pageChange)="onPageChange($event)"></ngb-pagination>

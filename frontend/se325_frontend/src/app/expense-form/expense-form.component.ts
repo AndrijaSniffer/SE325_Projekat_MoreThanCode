@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ExpensesService} from "../services/expenses.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-expense-form',
@@ -8,11 +11,45 @@ import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 })
 export class ExpenseFormComponent implements OnInit {
   model: NgbDateStruct;
+  form: FormGroup;
 
-  constructor() {
+  constructor(private _formBuilder: FormBuilder,
+              private _expensesService: ExpensesService,
+              private _router: Router) {
   }
 
   ngOnInit(): void {
+    this.buildForm()
+  }
+
+  buildForm() {
+    this.form = this._formBuilder.group({
+      date: new FormControl("", Validators.required),
+      shop: new FormControl("", Validators.required),
+      expense: new FormControl("", Validators.required)
+    })
+  }
+
+  submitForm() {
+    let date = this.form.value.date;
+    const dateString = new Date(`${date.month}-${date.day}-${date.year}`);
+
+    // console.log(`${date.month}-${date.day}-${date.year}`)
+    // console.warn(new Date(`${date.month}-${date.day}-${date.year}`).toISOString())
+
+    this._expensesService.createExpense({
+      date: dateString.toISOString(),
+      cost: this.form.value.expense,
+      shop: this.form.value.shop
+    }).subscribe(expense => {
+      this._router.navigate([""])
+    }, error => {
+      alert("Error has occured")
+    })
+  }
+
+  goBack() {
+    this._router.navigate([""])
   }
 
 }

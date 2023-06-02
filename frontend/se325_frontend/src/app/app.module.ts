@@ -7,12 +7,15 @@ import {ExpenseTableComponent} from './expense-table/expense-table.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {IncomeTableComponent} from './income-table/income-table.component';
 import {ExpenseFormComponent} from './expense-form/expense-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {IncomeFormComponent} from './income-form/income-form.component';
 import {StatByPropertyComponent} from './stat-by-property/stat-by-property.component';
 import {StatByMonthComponent} from './stat-by-month/stat-by-month.component';
 import {StatByYearComponent} from './stat-by-year/stat-by-year.component';
 import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
+import {LoginRegisterComponent} from './login-register/login-register.component';
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -23,15 +26,19 @@ import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
     IncomeFormComponent,
     StatByPropertyComponent,
     StatByMonthComponent,
-    StatByYearComponent
+    StatByYearComponent,
+    LoginRegisterComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
     NgxChartsModule,
-    PieChartModule
+    PieChartModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
