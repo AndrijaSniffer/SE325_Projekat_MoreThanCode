@@ -3,6 +3,14 @@ import {TableOptions} from "../classes/table-options";
 import {Income} from "../classes/income";
 import {Router} from "@angular/router";
 import {IncomesService} from "../services/incomes.service";
+import {YesNoDialogComponent} from "../yes-no-dialog/yes-no-dialog.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {IncomesDialogComponent} from "../incomes-dialog/incomes-dialog.component";
+
+interface CloseDto {
+  reason: string,
+  income: Income
+}
 
 @Component({
   selector: 'app-income-table',
@@ -28,7 +36,8 @@ export class IncomeTableComponent implements OnInit {
 
   constructor(private _router: Router,
               @Inject(LOCALE_ID) public activeLocale: string,
-              private _incomeService: IncomesService) {
+              private _incomeService: IncomesService,
+              private _modalService: NgbModal) {
 
   }
 
@@ -79,5 +88,40 @@ export class IncomeTableComponent implements OnInit {
       this.incomes = tableOptions.incomeList;
     })
     this.currentPageNumber = 1;
+  }
+
+  openUpdateDialog(id: number) {
+    this._modalService.open(IncomesDialogComponent).result.then(
+      (result: CloseDto) => {
+
+        if (result.reason === "save") {
+          console.warn(result.income)
+          this._incomeService.updateIncome(id, result.income).subscribe((expense) => {
+            this.getAllIncome();
+          }, error => {
+            alert("An error has occurred")
+          })
+        }
+      },
+      (reason) => {
+      }
+    );
+  }
+
+  openDeleteDialog(id: number) {
+    const modalRef = this._modalService.open(YesNoDialogComponent);
+    modalRef.componentInstance.openReason = "income"
+    modalRef.result.then(
+      (result) => {
+        console.warn(result)
+        if (result === "yes") {
+          this._incomeService.deleteIncome(id).subscribe((response) => {
+            this.getAllIncome();
+          });
+        }
+      },
+      (reason) => {
+      }
+    )
   }
 }

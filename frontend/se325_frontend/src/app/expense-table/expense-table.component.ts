@@ -3,6 +3,14 @@ import {Expense} from "../classes/expense";
 import {TableOptions} from "../classes/table-options";
 import {Router} from "@angular/router";
 import {ExpensesService} from "../services/expenses.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ExpensesDialogComponent} from "../expenses-dialog/expenses-dialog.component";
+import {YesNoDialogComponent} from "../yes-no-dialog/yes-no-dialog.component";
+
+interface CloseDto {
+  reason: string,
+  expense: Expense
+}
 
 @Component({
   selector: 'app-expense-table',
@@ -24,10 +32,12 @@ export class ExpenseTableComponent implements OnInit {
     }
   };
   expenses: Expense[] = [];
+  closeDto: CloseDto
 
   constructor(private _router: Router,
               @Inject(LOCALE_ID) public activeLocale: string,
-              private _expenseService: ExpensesService) {
+              private _expenseService: ExpensesService,
+              private _modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -78,6 +88,41 @@ export class ExpenseTableComponent implements OnInit {
       this.expenses = tableOptions.expenseList;
     })
     this.currentPageNumber = 1;
+  }
+
+  openUpdateDialog(id: number) {
+    this._modalService.open(ExpensesDialogComponent).result.then(
+      (result: CloseDto) => {
+
+        if (result.reason === "save") {
+          console.warn(result.expense)
+          this._expenseService.updateExpense(id, result.expense).subscribe((expense) => {
+            this.getAllExpense();
+          }, error => {
+            alert("An error has occurred")
+          })
+        }
+      },
+      (reason) => {
+      }
+    );
+  }
+
+  openDeleteDialog(id: number) {
+    const modalRef = this._modalService.open(YesNoDialogComponent);
+    modalRef.componentInstance.openReason = "expense"
+    modalRef.result.then(
+      (result) => {
+        console.warn(result)
+        if (result === "yes") {
+          this._expenseService.deleteExpense(id).subscribe((response) => {
+            this.getAllExpense();
+          });
+        }
+      },
+      (reason) => {
+      }
+    )
   }
 
 }

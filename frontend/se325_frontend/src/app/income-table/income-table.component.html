@@ -20,7 +20,7 @@
           class="bi sort-arrow"></i>
       </button>
     </th>
-    <th scope="col"><span i18n>Zarada</span>
+    <th scope="col"><span i18n>Prihod</span>
       <button class="btn sort-btn" (click)="tableSort('earning')">
         <i
           [ngClass]="{'bi-filter': options.sort.order !== 'earning',
@@ -30,7 +30,7 @@
       </button>
     </th>
     <th scope="col" i18n>Izmeni</th>
-    <th scope="col" i18n>Obrisi</th>
+    <th scope="col" i18n>Obriši</th>
   </tr>
   </thead>
   <tbody>
@@ -40,10 +40,10 @@
     <td>{{income.source}}</td>
     <td>{{income.earning | number: '1.1-1' : activeLocale}}</td>
     <td>
-      <button class="btn"><i class="bi bi-pencil"></i></button>
+      <button class="btn"><i class="bi bi-pencil" (click)="openUpdateDialog(income.incomeId)"></i></button>
     </td>
     <td>
-      <button class="btn"><i class="bi bi-trash"></i></button>
+      <button class="btn"><i class="bi bi-trash" (click)="openDeleteDialog(income.incomeId)"></i></button>
     </td>
   </tr>
   </tbody>

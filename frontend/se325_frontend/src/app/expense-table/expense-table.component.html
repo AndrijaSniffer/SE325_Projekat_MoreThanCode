@@ -30,7 +30,7 @@
       </button>
     </th>
     <th scope="col" i18n>Izmeni</th>
-    <th scope="col" i18n>Obrisi</th>
+    <th scope="col" i18n>Obriši</th>
   </tr>
   </thead>
   <tbody>
@@ -41,10 +41,10 @@
     <!--    <td>{{expense.cost | number: '1.1-1'}}</td>-->
     <td>{{expense.cost | number: '1.1-1' : activeLocale}}</td>
     <td>
-      <button class="btn"><i class="bi bi-pencil"></i></button>
+      <button class="btn" (click)="openUpdateDialog(expense.expenseId)"><i class="bi bi-pencil"></i></button>
     </td>
     <td>
-      <button class="btn"><i class="bi bi-trash"></i></button>
+      <button class="btn" (click)="openDeleteDialog(expense.expenseId)"><i class="bi bi-trash"></i></button>
     </td>
   </tr>
   </tbody>

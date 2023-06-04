@@ -16,6 +16,9 @@ import {NgxChartsModule, PieChartModule} from "@swimlane/ngx-charts";
 import {LoginRegisterComponent} from './login-register/login-register.component';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ExpensesDialogComponent} from './expenses-dialog/expenses-dialog.component';
+import {IncomesDialogComponent} from './incomes-dialog/incomes-dialog.component';
+import {YesNoDialogComponent} from './yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     StatByPropertyComponent,
     StatByMonthComponent,
     StatByYearComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    ExpensesDialogComponent,
+    IncomesDialogComponent,
+    YesNoDialogComponent
   ],
   imports: [
     BrowserModule,

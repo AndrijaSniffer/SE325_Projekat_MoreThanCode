@@ -20,4 +20,13 @@ export class ExpensesService {
     return this._http.post("http://localhost:8080/expenses", JSON.stringify(expense),
       {withCredentials: true, headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')})
   }
+
+  updateExpense(id: number, expense: Expense) {
+    return this._http.put(`http://localhost:8080/expenses/${id}`, JSON.stringify(expense),
+      {withCredentials: true, headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')});
+  }
+
+  deleteExpense(id: number) {
+    return this._http.delete(`http://localhost:8080/expenses/${id}`, {withCredentials: true})
+  }
 }

@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title" i18n>Izmena prihoda</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="mb-3">
+      <label for="datum" i18n>Datum</label>
+      <div class="input-group">
+        <input
+          id="datum"
+          class="form-control"
+          placeholder="mm-dd-yyyy"
+          name="datumKupovine"
+          [(ngModel)]="model"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          formControlName="date"
+          required
+        />
+        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+      </div>
+      <div class="row">
+        <label for="izvor" i18n>Izvor</label>
+        <input type="text" class="form-control" id="izvor" formControlName="source" required>
+      </div>
+      <div class="row">
+        <label for="zarada" i18n>Prihod</label>
+        <input type="number" class="form-control" id="zarada" formControlName="income" required>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="close()" i18n>Sačuvaj</button>
+</div>

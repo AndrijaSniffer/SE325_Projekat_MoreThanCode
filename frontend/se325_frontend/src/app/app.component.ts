@@ -1,6 +1,8 @@
 import {Component, Inject, LOCALE_ID} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "./services/user.service";
+import {YesNoDialogComponent} from "./yes-no-dialog/yes-no-dialog.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,8 @@ export class AppComponent {
 
   constructor(private _router: Router,
               @Inject(LOCALE_ID) public activeLocale: string,
-              private _userService: UserService) {
+              private _userService: UserService,
+              private _modalService: NgbModal) {
 
     this._userService.isLogedIn.subscribe(isLogedIn => {
       this.showNavbar = isLogedIn;
@@ -41,7 +44,19 @@ export class AppComponent {
   }
 
   logoutUser() {
-    this._userService.logoutUser();
+    const modalRef = this._modalService.open(YesNoDialogComponent);
+    modalRef.componentInstance.openReason = "logout"
+    modalRef.result.then(
+      (result) => {
+        console.warn(result)
+        if (result === "yes") {
+          this._userService.logoutUser();
+        }
+      },
+      (reason) => {
+      }
+    )
+
   }
 
   title = 'se325_frontend';
