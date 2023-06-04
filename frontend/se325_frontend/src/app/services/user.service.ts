@@ -52,6 +52,14 @@ export class UserService {
     })
   }
 
+  logoutUser() {
+    sessionStorage.removeItem("account")
+    this.loggedInUser = null;
+    this.isLogedInValue = false;
+    this._isLogedIn.next(false);
+    this._router.navigate(["login"])
+  }
+
   checkIfUserIsLoggedIn() {
     let sessionUser = sessionStorage.getItem("account")
     if (this.isLogedInValue && sessionUser) {

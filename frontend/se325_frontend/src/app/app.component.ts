@@ -40,5 +40,9 @@ export class AppComponent {
     window.location.href = `/${lang}`;
   }
 
+  logoutUser() {
+    this._userService.logoutUser();
+  }
+
   title = 'se325_frontend';
 }
