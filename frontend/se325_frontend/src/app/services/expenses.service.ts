@@ -15,8 +15,11 @@ export class ExpensesService {
     return this._http.get(`http://localhost:8080/expenses?pageNumber=${pageNumber}&pageSize=${pageSize}&sort=${sort}`, {withCredentials: true})
   }
 
+  getExpenseById(id: number): Observable<object> {
+    return this._http.get(`http://localhost:8080/expenses/${id}`, {withCredentials: true})
+  }
+
   createExpense(expense: Expense) {
-    console.warn(expense)
     return this._http.post("http://localhost:8080/expenses", JSON.stringify(expense),
       {withCredentials: true, headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')})
   }
@@ -28,5 +31,9 @@ export class ExpensesService {
 
   deleteExpense(id: number) {
     return this._http.delete(`http://localhost:8080/expenses/${id}`, {withCredentials: true})
+  }
+
+  searchExpenseByShop(shop: string, pageNumber: number = 0, pageSize: number = 10, sort: string = "date") {
+    return this._http.get(`http://localhost:8080/expenses/?shop=${shop}&pageNumber=${pageNumber}&pageSize=${pageSize}&sort=${sort}`, {withCredentials: true})
   }
 }

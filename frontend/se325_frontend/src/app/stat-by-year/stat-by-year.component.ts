@@ -75,9 +75,6 @@ export class StatByYearComponent implements OnInit {
   }
 
   updateChart() {
-    // console.error(this.statsByYear)
-    // console.error(this.statsByYearChart)
-
     this.statsByYear = [...this.statsByYear];
     this.statsByYearChart = [...this.statsByYearChart];
   }

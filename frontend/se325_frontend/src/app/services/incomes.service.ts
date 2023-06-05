@@ -15,8 +15,11 @@ export class IncomesService {
     return this._http.get(`http://localhost:8080/incomes?pageNumber=${pageNumber}&pageSize=${pageSize}&sort=${sort}`, {withCredentials: true})
   }
 
+  getIncomeById(id: number): Observable<object> {
+    return this._http.get(`http://localhost:8080/incomes/${id}`, {withCredentials: true})
+  }
+
   createIncomes(income: Income) {
-    console.warn(income)
     return this._http.post("http://localhost:8080/incomes", JSON.stringify(income),
       {withCredentials: true, headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8')})
   }
@@ -28,5 +31,9 @@ export class IncomesService {
 
   deleteIncome(id: number) {
     return this._http.delete(`http://localhost:8080/incomes/${id}`, {withCredentials: true})
+  }
+
+  searchIncomeBySource(source: string, pageNumber: number = 0, pageSize: number = 10, sort: string = "date") {
+    return this._http.get(`http://localhost:8080/incomes/?source=${source}&pageNumber=${pageNumber}&pageSize=${pageSize}&sort=${sort}`, {withCredentials: true})
   }
 }

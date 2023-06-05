@@ -31,21 +31,20 @@ export class IncomeFormComponent implements OnInit {
   }
 
   submitForm() {
-    let date = this.form.value.date;
-    const dateString = new Date(`${date.month}-${date.day}-${date.year}`);
+    if (this.form.valid) {
+      let date = this.form.value.date;
+      const dateString = new Date(`${date.month}-${date.day}-${date.year}`);
 
-    // console.log(`${date.month}-${date.day}-${date.year}`)
-    // console.warn(new Date(`${date.month}-${date.day}-${date.year}`).toISOString())
-
-    this._incomeService.createIncomes({
-      date: dateString.toISOString(),
-      source: this.form.value.source,
-      earning: this.form.value.income
-    }).subscribe(expense => {
-      this._router.navigate(["incomes"])
-    }, error => {
-      alert("Error has occured")
-    })
+      this._incomeService.createIncomes({
+        date: dateString.toISOString(),
+        source: this.form.value.source,
+        earning: this.form.value.income
+      }).subscribe(expense => {
+        this._router.navigate(["incomes"])
+      }, error => {
+        alert("Error has occured")
+      })
+    }
   }
 
   goBack() {

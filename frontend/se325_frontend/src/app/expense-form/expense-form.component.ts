@@ -31,21 +31,20 @@ export class ExpenseFormComponent implements OnInit {
   }
 
   submitForm() {
-    let date = this.form.value.date;
-    const dateString = new Date(`${date.month}-${date.day}-${date.year}`);
+    if (this.form.valid) {
+      let date = this.form.value.date;
+      const dateString = new Date(`${date.month}-${date.day}-${date.year}`);
 
-    // console.log(`${date.month}-${date.day}-${date.year}`)
-    // console.warn(new Date(`${date.month}-${date.day}-${date.year}`).toISOString())
-
-    this._expensesService.createExpense({
-      date: dateString.toISOString(),
-      cost: this.form.value.expense,
-      shop: this.form.value.shop
-    }).subscribe(expense => {
-      this._router.navigate([""])
-    }, error => {
-      alert("Error has occured")
-    })
+      this._expensesService.createExpense({
+        date: dateString.toISOString(),
+        cost: this.form.value.expense,
+        shop: this.form.value.shop
+      }).subscribe(expense => {
+        this._router.navigate([""])
+      }, error => {
+        alert("Error has occured")
+      })
+    }
   }
 
   goBack() {

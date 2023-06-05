@@ -3,6 +3,8 @@ import {Router} from "@angular/router";
 import {UserService} from "./services/user.service";
 import {YesNoDialogComponent} from "./yes-no-dialog/yes-no-dialog.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {SearchService} from "./services/search.service";
 
 @Component({
   selector: 'app-root',
@@ -10,16 +12,21 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  form: FormGroup;
   showNavbar = false;
 
   constructor(private _router: Router,
               @Inject(LOCALE_ID) public activeLocale: string,
               private _userService: UserService,
-              private _modalService: NgbModal) {
-
+              private _modalService: NgbModal,
+              private _formBuilder: FormBuilder,
+              private _searchService: SearchService) {
     this._userService.isLogedIn.subscribe(isLogedIn => {
       this.showNavbar = isLogedIn;
+    })
+
+    this.form = this._formBuilder.group({
+      search: new FormControl("")
     })
   }
 
@@ -48,7 +55,6 @@ export class AppComponent {
     modalRef.componentInstance.openReason = "logout"
     modalRef.result.then(
       (result) => {
-        console.warn(result)
         if (result === "yes") {
           this._userService.logoutUser();
         }
@@ -57,6 +63,10 @@ export class AppComponent {
       }
     )
 
+  }
+
+  search() {
+    this._searchService.passValue(this.form.value.search);
   }
 
   title = 'se325_frontend';

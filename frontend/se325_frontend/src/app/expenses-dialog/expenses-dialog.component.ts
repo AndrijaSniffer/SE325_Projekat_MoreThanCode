@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Expense} from "../classes/expense";
@@ -11,6 +11,7 @@ import {Expense} from "../classes/expense";
 export class ExpensesDialogComponent implements OnInit {
   model: NgbDateStruct;
   form: FormGroup;
+  @Input() expense: Expense;
   closeDto: { reason: string, expense: Expense }
 
   constructor(public activeModal: NgbActiveModal,
@@ -22,10 +23,19 @@ export class ExpensesDialogComponent implements OnInit {
   }
 
   buildForm() {
+    let date = new Date(this.expense.date);
+    this.model = {
+      year: date.getFullYear(), month: (date.getMonth() + 1), day: date.getDate()
+    }
+
     this.form = this._formBuilder.group({
-      date: new FormControl("", Validators.required),
-      shop: new FormControl("", Validators.required),
-      expense: new FormControl("", Validators.required)
+      date: new FormControl({
+        year: date.getFullYear(),
+        month: (date.getMonth() + 1),
+        day: date.getDate()
+      }, Validators.required),
+      shop: new FormControl(this.expense.shop, Validators.required),
+      expense: new FormControl(this.expense.cost, Validators.required)
     })
   }
 
