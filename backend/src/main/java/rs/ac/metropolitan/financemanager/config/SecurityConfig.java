@@ -48,6 +48,11 @@ public class SecurityConfig {
                 .anyRequest()
                 .authenticated()
                 .and()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .and()
                 .httpBasic();
 
         return http.build();

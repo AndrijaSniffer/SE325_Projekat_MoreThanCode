@@ -5,6 +5,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RestController;
 import rs.ac.metropolitan.financemanager.dto.ExpenseDto;
@@ -19,7 +20,6 @@ public class ExpenseController implements ExpensesApi {
 
     private static final ExpenseMapper MAPPER = Mappers.getMapper((ExpenseMapper.class));
     private final ExpenseService expenseService;
-
     @Override
     public ResponseEntity<GetExpensesResponse> getExpenses(Integer pageNumber, Integer pageSize, String sort) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
